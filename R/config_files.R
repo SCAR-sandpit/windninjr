@@ -315,7 +315,7 @@ wn_check_config <- function(opts) {
         checked$output_speed_units <- TRUE
     }
 
-    height_units <- c("m", "ft")
+    height_units <- resolution_units <- c("m", "ft")
     if ("units_input_wind_height" %in% names(opts)) {
         opts$units_input_wind_height <- match_arg(opts$units_input_wind_height, height_units)
         checked$units_input_wind_height <- TRUE
@@ -343,13 +343,52 @@ wn_check_config <- function(opts) {
         write_ascii_output <- opts$write_ascii_output
         assert_that(is.flag(write_ascii_output), !is.na(write_ascii_output))
         checked$write_ascii_output <- TRUE
+        ## these only matter if we are producing ascii output
+        if ("ascii_out_resolution" %in% names(opts)) {
+            ascii_out_resolution <- opts$ascii_out_resolution
+            assert_that(is.numeric(ascii_out_resolution), is.scalar(ascii_out_resolution), ascii_out_resolution == -1 || ascii_out_resolution > 0)
+            checked$ascii_out_resolution <- TRUE
+        }
+        if ("units_ascii_out_resolution" %in% names(opts)) {
+            opts$units_ascii_out_resolution <- match_arg(opts$units_ascii_out_resolution, resolution_units)
+            checked$units_ascii_out_resolution <- TRUE
+        }
+    }
+
+    if ("write_shapefile_output" %in% names(opts)) {
+        write_shapefile_output <- opts$write_shapefile_output
+        assert_that(is.flag(write_shapefile_output), !is.na(write_shapefile_output))
+        checked$write_shapefile_output <- TRUE
+        if ("shape_out_resolution" %in% names(opts)) {
+            shape_out_resolution <- opts$shape_out_resolution
+            assert_that(is.numeric(shape_out_resolution), is.scalar(shape_out_resolution), shape_out_resolution == -1 || shape_out_resolution > 0)
+            checked$shape_out_resolution <- TRUE
+        }
+        if ("units_shape_out_resolution" %in% names(opts)) {
+            opts$units_shape_out_resolution <- match_arg(opts$units_shape_out_resolution, resolution_units)
+            checked$units_shape_out_resolution <- TRUE
+        }
+    }
+
+    if ("write_goog_output" %in% names(opts)) {
+        write_goog_output <- opts$write_goog_output
+        assert_that(is.flag(write_goog_output), !is.na(write_goog_output))
+        checked$write_goog_output <- TRUE
+        if ("goog_out_resolution" %in% names(opts)) {
+            goog_out_resolution <- opts$goog_out_resolution
+            assert_that(is.numeric(goog_out_resolution), is.scalar(goog_out_resolution), goog_out_resolution == -1 || goog_out_resolution > 0)
+            checked$goog_out_resolution <- TRUE
+        }
+        if ("units_goog_out_resolution" %in% names(opts)) {
+            opts$units_goog_out_resolution <- match_arg(opts$units_goog_out_resolution, resolution_units)
+            checked$units_goog_out_resolution <- TRUE
+        }
     }
 
     if ("output_path" %in% names(opts)) {
         if (!fs::dir_exists(opts$output_path)) stop("output_path directory ", opts$output_path, " does not exist")
         checked$output_path <- TRUE
     }
-    ## TODO “ascii_out_resolution”, “units_ascii_out_resolution”, “write_shapefile_output”, “shape_out_resolution”, “units_shape_out_resolution”, “write_goog_output”, “goog_out_resolution”, “units_goog_out_resolution”
 
     if (!all(as.logical(checked))) {
         notchecked <- names(checked)[!as.logical(checked)]

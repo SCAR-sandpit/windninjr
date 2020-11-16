@@ -1,6 +1,6 @@
 Package: windninjr
 Title: Helper Functions for Running WindNinja
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: c(person(given = "Ben", family = "Raymond", role = c("aut", "cre"), email = "ben.raymond@aad.gov.au"))
 Description: Helper files for running WindNinja.
 License: MIT + file LICENSE
