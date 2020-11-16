@@ -1,0 +1,62 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# windninjr
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+<!-- badges: end -->
+
+Helper functions for running WindNinja from R.
+
+Be warned: this package is in an early stage of development with only limited functionality so far!
+
+## Installation
+
+You can install windninjr from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("SCAR-sandpit/windninjr")
+```
+
+## Example
+
+```{r example, warning = FALSE, message = FALSE}
+library(windninjr)
+
+## WindNinja is not on the system path, so we need to tell windninjr where it is
+wn_find_exe("/bin/windows/WindNinja")
+
+## plot the example DEM
+library(raster)
+demfile <- wn_demo_file("missoula_valley_elevation")
+plot(raster(demfile))
+
+## set up a domain-average model run with 10m/s winds blowing towards the west
+my_config <- wn_config_domain_average(elevation = demfile,
+                                      input_speed = 10, input_direction = 270)
+
+## run it
+res <- wn_run(my_config)
+
+## what outputs do we have?
+dir(res$output_dir)
+
+## read the modelled wind speed and direction
+x <- wn_read(res$output_dir)
+plot(x, main = c("Direction", "Speed"))
+
+```
