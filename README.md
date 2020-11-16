@@ -4,12 +4,15 @@
 # windninjr
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-Helper functions for running WindNinja from R
+Helper functions for running WindNinja from R.
 
-Be warned: this package is in an early stage of development with only limited functionality so far!
+Be warned: this package is in an early stage of development with only
+limited functionality so far\!
 
 ## Installation
 
@@ -25,7 +28,7 @@ devtools::install_github("SCAR-sandpit/windninjr")
 ``` r
 library(windninjr)
 
-## WindNinja is not on the system path, so we need to tell windninjr where it is
+## WindNinja is not on my system path, so I need to tell windninjr where it is
 wn_find_exe("/bin/windows/WindNinja")
 #> /bin/windows/WindNinja/WindNinja-3.6.0/bin/WindNinja_cli.exe
 
@@ -58,23 +61,23 @@ res <- wn_run(my_config)
 #> Run 0 (solver): 98% complete
 #> Run 0 (solver): 100% complete
 #> Run 0: Writing output files...
-#> Run 0: Meshing time was 0.003511 seconds.
-#> Run 0: Initialization time was 0.054494 seconds.
-#> Run 0: Equation building time was 0.037603 seconds.
-#> Run 0: Solver time was 0.287009 seconds.
-#> Run 0: Output writing time was 0.029225 seconds.
-#> Run 0: Total simulation time was 0.431158 seconds.
+#> Run 0: Meshing time was 0.003387 seconds.
+#> Run 0: Initialization time was 0.047520 seconds.
+#> Run 0: Equation building time was 0.037413 seconds.
+#> Run 0: Solver time was 0.364320 seconds.
+#> Run 0: Output writing time was 0.033494 seconds.
+#> Run 0: Total simulation time was 0.505288 seconds.
 #> Run 0: Run number 0 done!
 
 ## what outputs do we have?
 dir(res$output_dir)
-#> [1] "file16e02b894e63.cfg"                "missoula_valley_270_10_413m_ang.asc"
+#> [1] "file16e046c036d2.cfg"                "missoula_valley_270_10_413m_ang.asc"
 #> [3] "missoula_valley_270_10_413m_ang.prj" "missoula_valley_270_10_413m_cld.asc"
 #> [5] "missoula_valley_270_10_413m_cld.prj" "missoula_valley_270_10_413m_vel.asc"
 #> [7] "missoula_valley_270_10_413m_vel.prj"
 
 ## read the modelled wind speed and direction
-x <- stack(dir(res$output_dir, full.names = TRUE, pattern = "(vel|ang)\\.asc"))
+x <- wn_read(res$output_dir)
 plot(x, main = c("Direction", "Speed"))
 ```
 

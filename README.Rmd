@@ -37,7 +37,7 @@ devtools::install_github("SCAR-sandpit/windninjr")
 ```{r example, warning = FALSE, message = FALSE}
 library(windninjr)
 
-## WindNinja is not on the system path, so we need to tell windninjr where it is
+## WindNinja is not on my system path, so I need to tell windninjr where it is
 wn_find_exe("/bin/windows/WindNinja")
 
 ## plot the example DEM
