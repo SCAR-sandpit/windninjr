@@ -25,9 +25,10 @@ wn_run <- function(config, output_dir = tempfile(), create_output_dir = TRUE) {
     ## write config to file
     config_file <- tempfile(tmpdir = output_dir, fileext = ".cfg")
     wn_write_config_file(config_file, config)
-    cwd <- getwd()
-    on.exit(setwd(cwd))
-    setwd(output_dir)
+    ## output_path should make this unnecessary
+    ##cwd <- getwd()
+    ##on.exit(setwd(cwd))
+    ##setwd(output_dir)
     out <- sys::exec_wait(exe, config_file)
     list(output_dir = output_dir, out = out)
 }

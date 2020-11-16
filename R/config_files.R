@@ -268,6 +268,16 @@ wn_check_config <- function(opts) {
         opts$initialization_method <- match.arg(opts$initialization_method, c("domainAverageInitialization"))
         checked$initialization_method <- TRUE
     }
+    if ("momentum_flag" %in% names(opts)) {
+        momentum_flag <- opts$momentum_flag
+        assert_that(is.flag(momentum_flag), !is.na(momentum_flag))
+        checked$momentum_flag <- TRUE
+    }
+    if ("number_of_iterations" %in% names(opts)) {
+        number_of_iterations <- opts$number_of_iterations
+        assert_that(is.numeric(number_of_iterations), is.scalar(number_of_iterations), number_of_iterations > 0)
+        checked$number_of_iterations <- TRUE
+    }
     if ("input_speed" %in% names(opts)) {
         input_speed <- opts$input_speed
         assert_that(is.numeric(input_speed), all(input_speed > 0))
@@ -376,7 +386,7 @@ wn_check_config <- function(opts) {
 #'
 #' @export
 wn_config_domain_average <- function(input_speed, input_speed_units = "mps", input_direction, input_wind_height = 10, units_input_wind_height = "m",
-                                     momentum_flag = TRUE, number_of_iterations = 300L,
+                                     momentum_flag = FALSE, number_of_iterations = 300L,
                                      output_wind_height = 10, units_output_wind_height = "m", output_speed_units = "mps", ...) {
 
     assert_that(is.numeric(input_speed))
@@ -392,9 +402,9 @@ wn_config_domain_average <- function(input_speed, input_speed_units = "mps", inp
 ##output_buffer_clipping   = 5.0
 
     wn_check_config(c(list(initialization_method = "domainAverageInitialization",
-                           input_speed = input_speed,
+                           momentum_flag = momentum_flag, number_of_iterations = number_of_iterations,
+                           input_speed = input_speed, input_speed_units = input_speed_units,
                            input_direction = input_direction,
-                           input_speed_units = input_speed_units,
                            input_wind_height = input_wind_height,
                            units_input_wind_height = units_input_wind_height,
                            output_wind_height = output_wind_height,
