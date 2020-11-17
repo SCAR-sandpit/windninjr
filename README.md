@@ -7,6 +7,8 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![R build
+status](https://github.com/SCAR-sandpit/windninjr/workflows/R-CMD-check/badge.svg)](https://github.com/SCAR-sandpit/windninjr/actions)
 <!-- badges: end -->
 
 Helper functions for running WindNinja from R.
@@ -61,17 +63,17 @@ res <- wn_run(my_config)
 #> Run 0 (solver): 98% complete
 #> Run 0 (solver): 100% complete
 #> Run 0: Writing output files...
-#> Run 0: Meshing time was 0.003387 seconds.
-#> Run 0: Initialization time was 0.047520 seconds.
-#> Run 0: Equation building time was 0.037413 seconds.
-#> Run 0: Solver time was 0.364320 seconds.
-#> Run 0: Output writing time was 0.033494 seconds.
-#> Run 0: Total simulation time was 0.505288 seconds.
+#> Run 0: Meshing time was 0.003383 seconds.
+#> Run 0: Initialization time was 0.053820 seconds.
+#> Run 0: Equation building time was 0.040141 seconds.
+#> Run 0: Solver time was 0.289217 seconds.
+#> Run 0: Output writing time was 0.031570 seconds.
+#> Run 0: Total simulation time was 0.437994 seconds.
 #> Run 0: Run number 0 done!
 
 ## what outputs do we have?
 dir(res$output_dir)
-#> [1] "file16e046c036d2.cfg"                "missoula_valley_270_10_413m_ang.asc"
+#> [1] "file16e0424b1b9d.cfg"                "missoula_valley_270_10_413m_ang.asc"
 #> [3] "missoula_valley_270_10_413m_ang.prj" "missoula_valley_270_10_413m_cld.asc"
 #> [5] "missoula_valley_270_10_413m_cld.prj" "missoula_valley_270_10_413m_vel.asc"
 #> [7] "missoula_valley_270_10_413m_vel.prj"

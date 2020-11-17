@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![R build status](https://github.com/SCAR-sandpit/windninjr/workflows/R-CMD-check/badge.svg)](https://github.com/SCAR-sandpit/windninjr/actions)
 <!-- badges: end -->
 
 Helper functions for running WindNinja from R.
