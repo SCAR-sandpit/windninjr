@@ -10,7 +10,7 @@ wn_config_domain_average(
   input_direction,
   input_wind_height = 10,
   units_input_wind_height = "m",
-  momentum_flag = TRUE,
+  momentum_flag = FALSE,
   number_of_iterations = 300L,
   output_wind_height = 10,
   units_output_wind_height = "m",
